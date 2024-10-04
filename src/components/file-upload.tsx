@@ -103,7 +103,7 @@ const FileUpload = (props: InputProps) => {
     },
     [id],
   );
-
+  
   return (
     <div
       className={cn(
@@ -114,7 +114,7 @@ const FileUpload = (props: InputProps) => {
       <label
         htmlFor={id}
         className={`${
-          !!defaultImages
+          defaultImages.length > 0
             ? "cursor-not-allowed opacity-50"
             : "cursor-pointer  opacity-100"
         } `}
@@ -123,7 +123,7 @@ const FileUpload = (props: InputProps) => {
         <br />
         <span
           className={`w-[157px] rounded-[4px] bg-[#F5F5F5] px-4 py-1 text-sm text-black ${
-            !!defaultImages ? "opacity-50" : "opacity-100"
+            defaultImages.length > 0 ? "opacity-50" : "opacity-100"
           }`}
         >
           Select file
@@ -161,7 +161,7 @@ const FileUpload = (props: InputProps) => {
       )}
 
       <input
-        disabled={!!defaultImages}
+        disabled={defaultImages.length > 0}
         id={id}
         type="file"
         accept="image/*"
