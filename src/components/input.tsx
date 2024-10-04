@@ -29,7 +29,7 @@ const Input = (props: InputProps) => {
       <input
         {...registerField}
         type={t}
-        className="placeholder:text-input-placeholder ml-2 flex-1 bg-transparent font-[350px] text-white outline-none"
+        className="placeholder:text-input-placeholder ml-2 flex-1 bg-transparent font-[350px] text-white outline-none w-full"
         placeholder={placeholder}
         {...(t === "number" ? { step: "0.01" } : {})}
       />

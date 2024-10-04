@@ -121,7 +121,7 @@ const PokedexSearchPage = () => {
               icon={Search}
               t="text"
               placeholder="Search pokemon"
-              className="w-[400px] lg:w-[575px]"
+              className="md:w-[400px] w-full lg:w-[575px]"
               registerField={register("search")}
             />
 
