@@ -103,7 +103,7 @@ const ViewMorePage = () => {
             </div>
           ) : data ? (
             <div className="grid-cols-2 gap-[10px] lg:grid">
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center mb-4 lg:mb-0">
                 {data?.photo && (
                   <Image
                     src={data?.photo}
