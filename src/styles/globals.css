@@ -180,3 +180,28 @@ input[type="number"] {
     scale: 0.7;
   }
 }
+
+@media only screen and (max-width: 400px) {
+  .main-screen {
+    transform: scale(0.5);
+    top: 17%;
+    left: -8%;
+  }
+  .console-search {
+    bottom: 3%;
+    display: block;
+    transform: scale(0.5);
+    left: 5%;
+  }
+
+  .poke-screen {
+    transform: scale(0.52);
+    top: 10.3%;
+    right: -6.3%;
+  }
+  .view-more {
+    bottom: 3.9%;
+    right: 19.9%;
+    scale: 0.5;
+  }
+}
