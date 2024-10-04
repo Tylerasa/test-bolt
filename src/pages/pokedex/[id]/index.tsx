@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowBigRight, ArrowLeft, Pencil, Trash } from "lucide-react";
+import { ArrowBigRight, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

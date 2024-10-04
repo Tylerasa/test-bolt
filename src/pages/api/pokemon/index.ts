@@ -47,7 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       } = fields;
 
       const photo = files["photo[]"] ? files["photo[]"] : [];
-      const evolution_photo = files["evolution_photo[]"] || [];
+      const evolution_photo = files["evolution_photo[]"] ?? [];
 
       const missingFields: string[] = [];
       if (!name) missingFields.push("name");
@@ -92,8 +92,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
           weight: parseFloat(String(weight)),
           male_gender_ratio: parseFloat(String(male_gender_ratio)),
           female_gender_ratio: parseFloat(String(female_gender_ratio)),
-          abilities: abilities as string[],
-          egg_groups: egg_groups as string[],
+          abilities: abilities!,
+          egg_groups: egg_groups!,
           evolution_description: String(evolution_description),
           evolution_photo: evolutionFileUrls,
         },
@@ -109,7 +109,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       const query = req.query.search as string | undefined;
       const filter = req.query.filter as string | undefined;
 
-      console.log("filter", filter);
 
       const whereClause: Prisma.PokemonWhereInput = {
         ...(query && {
@@ -159,7 +158,6 @@ function uploadImage(
     const uploadPromise = s3
       .send(new PutObjectCommand(uploadParams))
       .then((data) => {
-        console.log("Darta", data);
         const fileUrl = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${file.originalFilename}`;
         list.push(fileUrl);
       });

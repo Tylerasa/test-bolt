@@ -34,7 +34,7 @@ const FileUpload = (props: InputProps) => {
     if (defaultImages.length > 0) {
       const initialPreviews = defaultImages.map((url) => ({
         url,
-        name: url?.split("/").pop() || "Image",
+        name: url?.split("/").pop() ?? "Image",
         isDefault: true,
       }));
       setPreviews(initialPreviews);
@@ -43,8 +43,7 @@ const FileUpload = (props: InputProps) => {
 
   const handleFileChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log("gwlll");
-      const files = Array.from(event.target.files || []);
+      const files = Array.from(event.target.files ?? []);
       const imageFiles = files.filter((file) => file.type.startsWith("image/"));
 
       if (files.length !== imageFiles.length) {
@@ -67,7 +66,6 @@ const FileUpload = (props: InputProps) => {
 
       Promise.all(newPreviews).then((results) => {
         setPreviews((prev) => {
-          // Keep default images and add new ones
           const defaultPreviews = prev.filter((p) => p.isDefault);
           return [...defaultPreviews, ...results];
         });

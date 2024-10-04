@@ -3,6 +3,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const prisma = new PrismaClient();
 import formidable from "formidable";
 
+interface Record {
+  [key: string]: string | number;
+}
+
 export const config = {
   api: {
     bodyParser: false,
@@ -57,26 +61,25 @@ export default async function handler(
       multiples: true,
     });
 
-    form.parse(req, async (err, fields, files) => {
+    form.parse(req, async (err, fields) => {
       if (err) {
         console.error("Error parsing form:", err);
         return res.status(500).json({ error: "Failed to process form" });
       }
       try {
-        const processedFields: { [key: string]: string | number } = {};
+        const processedFields: Record = {};
 
         for (const key in fields) {
-          if (fields[key]) {
-            if (Array.isArray(fields[key]) && fields[key][0]) {
-              console.log("processedFields[key]", key);
-              if (!isNaN(Number(fields[key][0])) && key !== "degree") {
-                processedFields[key] = parseFloat(fields[key][0]);
+          const fieldValue = fields[key]?.[0];
+
+          if (fieldValue) {
+            if (Array.isArray(fields[key])) {
+              if (!isNaN(Number(fieldValue)) && key !== "degree") {
+                processedFields[key] = parseFloat(fieldValue);
+              } else if (key === "abilities" || key === "egg_groups") {
+                processedFields[key] = JSON.parse(fieldValue);
               } else {
-                if (key == "abilities" || key == "egg_groups") {
-                  processedFields[key] = JSON.parse(fields[key][0]);
-                } else {
-                  processedFields[key] = fields[key][0];
-                }
+                processedFields[key] = fieldValue;
               }
             }
           }

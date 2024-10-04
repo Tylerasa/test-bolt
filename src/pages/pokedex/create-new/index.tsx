@@ -29,7 +29,7 @@ const CreateNewPokemonPage = () => {
           formData.append(`${key}[]`, file);
         });
       } else if (key === "egg_groups" || key === "abilities") {
-        let list = data[key].split(", ").map((l: string) => l.trim());
+        const list = data[key].split(", ").map((l: string) => l.trim());
         formData.append(key, list);
       } else {
         formData.append(key, data[key]);
@@ -59,7 +59,7 @@ const CreateNewPokemonPage = () => {
     mutationFn: (formData: FormData) => {
       return createPokemon(formData);
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["pokemons"] });
       toast("Pokemon created");
       router.push("/pokedex");

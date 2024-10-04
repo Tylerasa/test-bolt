@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
-  console.log("pathname", pathname)
   return (
     <nav className="bg-overlay flex w-full items-center justify-center py-5 text-white">
       <div className="inline-flex flex-col items-center ">

@@ -53,7 +53,7 @@ const EditPokemonPage = () => {
           formData.append(`${key}[]`, file);
         });
       } else if (key === "egg_groups" || key === "abilities") {
-        let list = data[key].split(", ").map((l: string) => l.trim());
+        const list = data[key].split(", ").map((l: string) => l.trim());
         formData.append(key, JSON.stringify(list));
       } else {
         formData.append(key, data[key]);
@@ -94,7 +94,7 @@ const EditPokemonPage = () => {
       if (evolution_photo) {
         const initialPreviews = evolution_photo.map((url) => ({
           url,
-          name: url.split("/").pop() || "Image",
+          name: url.split("/").pop() ?? "Image",
           isDefault: true,
         }));
 
@@ -111,7 +111,7 @@ const EditPokemonPage = () => {
       if (photo) {
         const preview = {
           url: photo,
-          name: photo.split("/").pop() || "Image",
+          name: photo.split("/").pop() ?? "Image",
           isDefault: true,
         };
 
@@ -126,7 +126,6 @@ const EditPokemonPage = () => {
       reset(resetData);
     }
   }, [data, reset]);
-
 
   return (
     <section className="px-2 lg:px-0">
@@ -160,13 +159,15 @@ const EditPokemonPage = () => {
               </p>
             </div>
             <div className="col-span-2">
-              <FileUpload
-                id="photo"
-                label="Pokemon Photo"
-                className="col-span-2"
-                registerField={register("photo")}
-                defaultImages={[data?.photo as string]}
-              />
+              {data?.photo ? (
+                <FileUpload
+                  id="photo"
+                  label="Pokemon Photo"
+                  className="col-span-2"
+                  registerField={register("photo")}
+                  defaultImages={[data!.photo]}
+                />
+              ) : null}
               <p className="text-sm text-red-700">
                 {errors.photo?.message?.toString()}
               </p>
@@ -287,14 +288,16 @@ const EditPokemonPage = () => {
             </div>
 
             <div className="col-span-2">
-              <FileUpload
-                id="evolution_photo"
-                label="Evolution Photo"
-                className="col-span-2"
-                multiple
-                registerField={register("evolution_photo")}
-                defaultImages={data?.evolution_photo || []}
-              />
+              {data?.evolution_photo ? (
+                <FileUpload
+                  id="evolution_photo"
+                  label="Evolution Photo"
+                  className="col-span-2"
+                  multiple
+                  registerField={register("evolution_photo")}
+                  defaultImages={data!.evolution_photo}
+                />
+              ) : null}
               <p className="text-sm text-red-700">
                 {errors.evolution_photo?.message?.toString()}
               </p>

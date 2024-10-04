@@ -9,7 +9,6 @@ import { useCallback, useEffect, useState } from "react";
 import type { Pokemon } from "@prisma/client";
 import useEmblaCarousel from "embla-carousel-react";
 import { EmblaCarouselType } from "embla-carousel";
-import { debounce } from "lodash";
 
 export default function Home() {
   const [currentPokemon, setCurrentPokemon] = useState<Pokemon>();

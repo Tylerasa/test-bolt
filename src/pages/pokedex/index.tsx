@@ -16,7 +16,6 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
 } from "~/components/ui/select";
 
 const debouncedSearch = debounce((searchFn, query) => searchFn(query), 400);
@@ -64,7 +63,7 @@ const PokedexSearchPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        return data.pokemons;
+        return data?.pokemons;
       }
       return [];
     } catch (error) {
@@ -109,7 +108,6 @@ const PokedexSearchPage = () => {
   }, [search]);
 
   const filterType = (value: string) => {
-    console.log("value", value)
     searchMutation({ query: "", isFilter: true, type: value });
   };
 
